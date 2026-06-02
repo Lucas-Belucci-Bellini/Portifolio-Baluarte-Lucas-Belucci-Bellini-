@@ -19,7 +19,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
 </head>
 <body>
@@ -39,7 +38,7 @@
       <a href="#sobre">Sobre</a>
       <a href="#projetos">Projetos</a>
       <a href="#habilidades">Habilidades</a>
-      <a href="#interesses">Interesses</a>
+      <a href="#imprensa">Imprensa</a>
       <a href="#contato">Contato</a>
     </nav>
 
@@ -78,6 +77,15 @@
       </div>
 
       <div class="about-grid">
+        <div class="about-intro reveal">
+          <div class="avatar">
+            <span class="media-placeholder" aria-hidden="true">🛡️</span>
+            <!-- Troque automaticamente: basta enviar public/img/lucas-perfil.jpg -->
+            <img src="img/lucas-perfil.jpg" alt="Foto de Lucas Belucci Bellini" loading="lazy" onerror="this.remove()" />
+          </div>
+          <p class="about-tag">📍 Londrina, Paraná · Brasil</p>
+        </div>
+
         <div class="about-text reveal">
           <p>
             Sou um entusiasta de tecnologia que adora colocar a mão na massa.
@@ -95,25 +103,25 @@
             recebe atualizações toda semana. Além dele, mantenho diversos experimentos
             indo de simuladores de computadores a games autorais.
           </p>
-        </div>
 
-        <aside class="about-cards">
-          <div class="fact-card reveal">
-            <span class="fact-icon">🎓</span>
-            <h3>Formação</h3>
-            <p>Londrinense Tech (1º e 2º semestre) &amp; cursos de Pensamento Computacional (básico e intermediário).</p>
+          <div class="about-cards">
+            <div class="fact-card">
+              <span class="fact-icon">🎓</span>
+              <h3>Formação</h3>
+              <p>Londrinense Tech (1º e 2º semestre) &amp; cursos de Pensamento Computacional.</p>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">🚀</span>
+              <h3>Em destaque</h3>
+              <p>Projeto Baluarte — no ar e com atualizações semanais.</p>
+            </div>
+            <div class="fact-card">
+              <span class="fact-icon">🤖</span>
+              <h3>IA &amp; criação</h3>
+              <p>Construo projetos apoiado em IA (Claude Sonnet, Codex).</p>
+            </div>
           </div>
-          <div class="fact-card reveal">
-            <span class="fact-icon">🚀</span>
-            <h3>Projeto em destaque</h3>
-            <p>Projeto Baluarte — no ar e com atualizações semanais.</p>
-          </div>
-          <div class="fact-card reveal">
-            <span class="fact-icon">🤖</span>
-            <h3>IA &amp; criação</h3>
-            <p>Construo projetos apoiado em IA (Claude Sonnet, Codex) e ferramentas modernas.</p>
-          </div>
-        </aside>
+        </div>
       </div>
     </section>
 
@@ -253,10 +261,51 @@
       </div>
     </section>
 
+    <!-- ====== NA IMPRENSA ====== -->
+    <section class="section" id="imprensa">
+      <div class="section-head reveal">
+        <span class="section-index">04</span>
+        <h2 class="section-title">Na imprensa &amp; momentos</h2>
+        <p class="section-sub">Aparições na mídia e registros de momentos marcantes.</p>
+      </div>
+
+      <article class="press-card reveal">
+        <figure class="press-figure media-frame">
+          <span class="media-placeholder" aria-hidden="true">📰 Recorte do jornal — imagem em breve</span>
+          <!-- Envie public/img/imprensa-folha-londrina.jpg para preencher -->
+          <img src="img/imprensa-folha-londrina.jpg" alt="Recorte do jornal Folha de Londrina citando Lucas Belucci" loading="lazy" onerror="this.remove()" />
+        </figure>
+        <div class="press-body">
+          <span class="press-source">📍 Folha de Londrina · Coluna Social — Oswaldo Militão · 20/03/2026</span>
+          <h3>Confraternização no Itaúna</h3>
+          <blockquote>
+            “Encontro descontraído de amigos com ideias para fortalecer Londrina e disposição
+            de fazer o melhor pelo desenvolvimento regional. (…) Na foto, alguns dos muitos amigos
+            presentes Rosemeire e André Maciel, Tercilinho, Luciana e <strong>Lucas Belucci</strong>,
+            Neto Romanholi, deputado Turini, Ismail Antônio Loução, Giovani Rodrigues da Silva
+            e Natel Francisco Silva.”
+          </blockquote>
+        </div>
+      </article>
+
+      <div class="gallery">
+        <figure class="gallery-item media-frame reveal">
+          <span class="media-placeholder" aria-hidden="true">🖼️ Foto em breve</span>
+          <!-- Envie public/img/galeria-sao-miguel-1.jpg -->
+          <img src="img/galeria-sao-miguel-1.jpg" alt="Lucas Belucci ao lado da estátua de São Miguel Arcanjo" loading="lazy" onerror="this.remove()" />
+        </figure>
+        <figure class="gallery-item media-frame reveal">
+          <span class="media-placeholder" aria-hidden="true">🖼️ Foto em breve</span>
+          <!-- Envie public/img/galeria-sao-miguel-2.jpg -->
+          <img src="img/galeria-sao-miguel-2.jpg" alt="Grupo na instalação do obelisco em devoção a São Miguel Arcanjo" loading="lazy" onerror="this.remove()" />
+        </figure>
+      </div>
+    </section>
+
     <!-- ====== INTERESSES ====== -->
     <section class="section" id="interesses">
       <div class="section-head reveal">
-        <span class="section-index">04</span>
+        <span class="section-index">05</span>
         <h2 class="section-title">Fora do código</h2>
         <p class="section-sub">Quando não estou programando, é provável que eu esteja por aqui.</p>
       </div>
@@ -280,12 +329,17 @@
     <!-- ====== CONTATO ====== -->
     <section class="section" id="contato">
       <div class="section-head reveal">
-        <span class="section-index">05</span>
+        <span class="section-index">06</span>
         <h2 class="section-title">Vamos conversar</h2>
         <p class="section-sub">Me encontre nas redes — respondo por todas elas.</p>
       </div>
 
       <div class="contact-grid">
+        <a class="contact-card contact-instagram reveal" href="https://www.instagram.com/lucas_belucci_bellini/" target="_blank" rel="noopener">
+          <span class="contact-icon">📸</span>
+          <span class="contact-name">Instagram <span class="badge-official">✔ Oficial</span></span>
+          <span class="contact-handle">@lucas_belucci_bellini</span>
+        </a>
         <a class="contact-card reveal" href="https://github.com/Lucas-Belucci-Bellini" target="_blank" rel="noopener">
           <span class="contact-icon">🐙</span>
           <span class="contact-name">GitHub</span>
@@ -301,11 +355,6 @@
           <span class="contact-name">Twitch</span>
           <span class="contact-handle">spartan_gamer_pro</span>
         </a>
-        <a class="contact-card reveal" href="https://steamcommunity.com/" target="_blank" rel="noopener">
-          <span class="contact-icon">🎮</span>
-          <span class="contact-name">Steam</span>
-          <span class="contact-handle">Spartan Gamer BR</span>
-        </a>
         <a class="contact-card reveal" href="https://open.spotify.com/" target="_blank" rel="noopener">
           <span class="contact-icon">🎧</span>
           <span class="contact-name">Spotify</span>
@@ -317,16 +366,21 @@
           <span class="contact-handle">lucasbb2007@gmail.com</span>
         </a>
       </div>
+
+      <p class="contact-note reveal">
+        ⚠️ Cuidado com perfis falsos: meu Instagram <strong>oficial</strong> é
+        <a href="https://www.instagram.com/lucas_belucci_bellini/" target="_blank" rel="noopener">@lucas_belucci_bellini</a>.
+      </p>
     </section>
   </main>
 
   <!-- ====== RODAPÉ ====== -->
   <footer class="footer">
     <p class="footer-brand">🛡️ Lucas Belucci Bellini</p>
-    <p class="footer-note">Sempre terminando o que começo. · Feito com HTML, CSS &amp; JavaScript.</p>
+    <p class="footer-note">Sempre terminando o que começo. · Feito com Vite, HTML, CSS &amp; JavaScript.</p>
     <p class="footer-year">© <span id="year"></span> — Todos os direitos reservados.</p>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>

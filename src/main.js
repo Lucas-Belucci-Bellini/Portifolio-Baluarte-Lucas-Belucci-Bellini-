@@ -3,6 +3,8 @@
    Interações: navbar, menu mobile, efeito de digitação,
    reveal ao rolar e ano do rodapé.
    ============================================================ */
+import "./style.css";
+
 (function () {
   "use strict";
 

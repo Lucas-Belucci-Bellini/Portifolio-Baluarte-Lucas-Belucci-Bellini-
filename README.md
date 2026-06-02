@@ -1,61 +1,77 @@
 # 🛡️ Portfólio — Lucas Belucci Bellini
 
-Site de portfólio pessoal de **Lucas Belucci Bellini**, desenvolvido como um site
-real (HTML, CSS e JavaScript puros), migrado a partir do antigo portfólio no Google Sites.
+Site de portfólio pessoal de **Lucas Belucci Bellini**, construído com **Vite**
+(HTML, CSS e JavaScript), migrado a partir do antigo portfólio no Google Sites.
 
 > _"Sempre termino o que começo, não importa quanto tempo leve."_
 
-## ✨ Sobre o site
-
-Single page responsiva, com tema escuro futurista, contendo:
+## ✨ Seções
 
 - **Início** — apresentação com efeito de digitação
-- **Sobre** — quem sou, formação e foco atual
-- **Projetos** — seleção de projetos (Projeto Baluarte, CHIPS, games, projetos com IA…)
-- **Habilidades** — programação, robótica, lógica digital, modelagem 3D, jogos e IA
+- **Sobre** — quem sou, formação, foto de perfil e foco atual
+- **Projetos** — Projeto Baluarte, CHIPS, games, projetos com IA e mais
+- **Habilidades** — programação, robótica, lógica digital, 3D, jogos e IA
+- **Na imprensa & momentos** — aparição na Folha de Londrina e galeria de fotos
 - **Interesses** — filmes, jogos e música
-- **Contato** — GitHub, YouTube, Twitch, Steam, Spotify e e-mail
+- **Contato** — Instagram oficial, GitHub, YouTube, Twitch, Spotify e e-mail
 
 ## 🚀 Tecnologias
 
+- [Vite](https://vitejs.dev/) (build e dev server)
 - HTML5 semântico
 - CSS3 (grid, flexbox, animações, design responsivo)
-- JavaScript (sem dependências externas)
+- JavaScript (sem frameworks)
 - Google Fonts (Orbitron + Inter)
 
 ## 📂 Estrutura
 
 ```
 .
-├── index.html        # Página principal
-├── css/
-│   └── style.css     # Estilos e responsividade
-├── js/
-│   └── main.js       # Interações (menu, digitação, reveal)
-└── .nojekyll         # Garante o servir correto no GitHub Pages
+├── index.html              # Página principal (entry point do Vite)
+├── src/
+│   ├── main.js             # Interações + importa o CSS
+│   └── style.css           # Estilos e responsividade
+├── public/
+│   ├── .nojekyll
+│   └── img/                # Imagens do site (ver public/img/README.md)
+├── .github/workflows/
+│   └── deploy.yml          # Deploy automático no GitHub Pages
+├── vite.config.js
+└── package.json
 ```
 
-## 🌐 Como rodar localmente
-
-Basta abrir o `index.html` no navegador, ou servir a pasta:
+## 💻 Rodar localmente
 
 ```bash
-# Python 3
-python3 -m http.server 8000
-# depois acesse http://localhost:8000
+npm install      # instala as dependências (1ª vez)
+npm run dev      # servidor de desenvolvimento (http://localhost:5173)
+npm run build    # gera a versão de produção em dist/
+npm run preview  # pré-visualiza o build de produção
 ```
 
-## 📦 Publicação (GitHub Pages)
+## 🌐 Publicação (GitHub Pages automático)
 
-O site pode ser publicado gratuitamente pelo GitHub Pages:
+O deploy é **automático** via GitHub Actions a cada push na branch `main`.
+Para ativar (uma única vez):
 
-1. Acesse **Settings → Pages** no repositório.
-2. Em **Source**, escolha a branch `main` e a pasta `/ (root)`.
-3. Salve. Em alguns minutos o site estará no ar.
+1. Vá em **Settings → Pages**.
+2. Em **Build and deployment → Source**, selecione **GitHub Actions**.
+
+A partir daí, todo push no `main` publica o site em:
+
+```
+https://lucas-belucci-bellini.github.io/Portifolio-Baluarte-Lucas-Belucci-Bellini-/
+```
+
+## 🖼️ Adicionar imagens
+
+Veja [`public/img/README.md`](public/img/README.md) — basta enviar os arquivos
+com os nomes indicados e eles aparecem automaticamente no site.
 
 ## 🔗 Links
 
 - **Projeto Baluarte:** https://projeto-baluarte.vercel.app/#/home
+- **Instagram (oficial):** https://www.instagram.com/lucas_belucci_bellini/
 - **GitHub:** https://github.com/Lucas-Belucci-Bellini
 
 ---

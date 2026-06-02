@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-lucas-belucci-bellini",
+  "version": "1.0.0",
+  "description": "Portfólio pessoal de Lucas Belucci Bellini — site em Vite (HTML, CSS e JS).",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "author": "Lucas Belucci Bellini",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.4.10"
+  }
+}

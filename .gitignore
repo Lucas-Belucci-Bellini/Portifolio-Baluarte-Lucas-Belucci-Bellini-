@@ -1,0 +1,20 @@
+# Dependências
+node_modules/
+
+# Build do Vite
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operacional / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
