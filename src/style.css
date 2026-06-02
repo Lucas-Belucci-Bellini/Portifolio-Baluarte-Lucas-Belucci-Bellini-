@@ -261,25 +261,68 @@ a { color: inherit; text-decoration: none; }
    ============================================================ */
 .about-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 40px;
+  grid-template-columns: 0.8fr 1.6fr;
+  gap: 44px;
   align-items: start;
 }
+.about-intro { position: sticky; top: 110px; text-align: center; }
+.about-tag { margin-top: 16px; color: var(--text-dim); font-size: .9rem; }
+
+/* Avatar / foto de perfil */
+.avatar {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px -24px rgba(0,0,0,.8);
+}
+.avatar img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+
 .about-text p { margin-bottom: 18px; color: var(--text-dim); }
 .about-text strong { color: var(--text); }
 
-.about-cards { display: flex; flex-direction: column; gap: 18px; }
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
 .fact-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 22px;
+  padding: 20px;
   transition: transform .25s ease, border-color .25s ease;
 }
 .fact-card:hover { transform: translateY(-4px); border-color: var(--primary); }
 .fact-icon { font-size: 1.6rem; display: block; margin-bottom: 8px; }
-.fact-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
-.fact-card p { color: var(--text-dim); font-size: .92rem; }
+.fact-card h3 { font-size: 1rem; margin-bottom: 6px; }
+.fact-card p { color: var(--text-dim); font-size: .88rem; }
+
+/* ============================================================
+   Moldura de mídia (placeholder até a imagem ser enviada)
+   ============================================================ */
+.media-frame { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--surface-2), var(--surface)); }
+.media-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px;
+  color: var(--text-dim);
+  font-size: .9rem;
+  letter-spacing: .3px;
+  background-image:
+    linear-gradient(rgba(41,224,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41,224,255,.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
 
 /* ============================================================
    Projetos
@@ -361,6 +404,55 @@ a { color: inherit; text-decoration: none; }
 .skill-chip:hover { transform: translateY(-4px); border-color: var(--primary); color: var(--primary); }
 
 /* ============================================================
+   Na imprensa
+   ============================================================ */
+.press-card {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.press-figure { min-height: 260px; }
+.press-body { padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+.press-source {
+  font-size: .78rem;
+  letter-spacing: .5px;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.press-body h3 { font-family: var(--font-display); font-size: 1.35rem; margin-bottom: 14px; }
+.press-body blockquote {
+  border-left: 3px solid var(--primary);
+  padding-left: 18px;
+  color: var(--text-dim);
+  font-style: italic;
+  line-height: 1.7;
+}
+.press-body blockquote strong { color: var(--text); font-style: normal; }
+
+/* ============================================================
+   Galeria
+   ============================================================ */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.gallery-item {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: transform .25s ease, border-color .25s ease;
+}
+.gallery-item img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-item:hover { transform: translateY(-5px); border-color: var(--primary); }
+
+/* ============================================================
    Interesses
    ============================================================ */
 .interests-grid {
@@ -400,8 +492,33 @@ a { color: inherit; text-decoration: none; }
 }
 .contact-card:hover { transform: translateY(-5px); border-color: var(--primary); background: var(--surface-2); }
 .contact-icon { font-size: 1.8rem; margin-bottom: 8px; }
-.contact-name { font-family: var(--font-display); font-weight: 500; font-size: 1.05rem; }
+.contact-name { font-family: var(--font-display); font-weight: 500; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .contact-handle { color: var(--text-dim); font-size: .88rem; word-break: break-all; }
+
+/* Instagram oficial em destaque */
+.contact-instagram {
+  background: linear-gradient(135deg, rgba(225,48,108,.16), rgba(131,58,180,.16)), var(--surface);
+  border-color: rgba(225,48,108,.4);
+}
+.contact-instagram:hover { border-color: #e1306c; }
+.badge-official {
+  font-family: var(--font-body);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: #04121a;
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.contact-note {
+  text-align: center;
+  margin-top: 32px;
+  color: var(--text-dim);
+  font-size: .92rem;
+}
+.contact-note a { color: var(--primary); font-weight: 600; }
 
 /* ============================================================
    Rodapé
@@ -431,7 +548,11 @@ a { color: inherit; text-decoration: none; }
    ============================================================ */
 @media (max-width: 860px) {
   .about-grid { grid-template-columns: 1fr; }
+  .about-intro { position: static; margin-bottom: 8px; }
+  .avatar { max-width: 200px; }
   .project-card.featured { grid-column: span 1; }
+  .press-card { grid-template-columns: 1fr; }
+  .press-figure { min-height: 200px; }
 
   .nav-toggle { display: flex; }
   .nav-links {
