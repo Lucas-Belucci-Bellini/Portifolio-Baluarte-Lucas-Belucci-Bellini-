@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfólio de Lucas Belucci Bellini — desenvolvedor apaixonado por programação, robótica, lógica digital e desenvolvimento de jogos. Criador do Projeto Baluarte." />
+  <meta name="description" content="Portfólio de Lucas Belucci Bellini — estudante de Ciência da Computação na UNIFIL (Londrina, Brasil). Programação, robótica, lógica digital, jogos e o Projeto Baluarte." />
   <meta name="author" content="Lucas Belucci Bellini" />
-  <meta name="theme-color" content="#0a0e1a" />
+  <meta name="theme-color" content="#050a0f" />
 
-  <!-- Open Graph / redes sociais -->
   <meta property="og:title" content="Lucas Belucci Bellini — Portfólio" />
-  <meta property="og:description" content="Desenvolvedor, criador do Projeto Baluarte. Programação, robótica, lógica digital e jogos." />
+  <meta property="og:description" content="Ciência da Computação @ UNIFIL. Criador do Projeto Baluarte. Programação, robótica, lógica digital e jogos." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
 
@@ -17,29 +16,33 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
 </head>
 <body>
-  <!-- ====== Fundo animado ====== -->
-  <div class="bg-grid" aria-hidden="true"></div>
-  <div class="bg-glow" aria-hidden="true"></div>
+  <!-- Cursor customizado -->
+  <div class="cur" id="cur" aria-hidden="true"></div>
+  <div class="cur-r" id="curR" aria-hidden="true"></div>
 
-  <!-- ====== Navegação ====== -->
+  <!-- Overlays de fundo -->
+  <div class="scanlines" aria-hidden="true"></div>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+  <!-- ====== NAVBAR ====== -->
   <header class="navbar" id="navbar">
     <a href="#home" class="brand">
       <span class="brand-mark">🛡️</span>
-      <span class="brand-text">Lucas <strong>Belucci</strong></span>
+      <span class="brand-text">LUCAS<span>.BELUCCI</span></span>
     </a>
 
     <nav class="nav-links" id="navLinks">
-      <a href="#home">Início</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#habilidades">Habilidades</a>
-      <a href="#imprensa">Imprensa</a>
-      <a href="#contato">Contato</a>
+      <a href="#home"><span class="nav-idx">00</span> Início</a>
+      <a href="#sobre"><span class="nav-idx">01</span> Sobre</a>
+      <a href="#projetos"><span class="nav-idx">02</span> Projetos</a>
+      <a href="#habilidades"><span class="nav-idx">03</span> Stack</a>
+      <a href="#imprensa"><span class="nav-idx">04</span> Imprensa</a>
+      <a href="#contato"><span class="nav-idx">05</span> Contato</a>
     </nav>
 
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
@@ -50,40 +53,71 @@
   <main>
     <!-- ====== HERO ====== -->
     <section class="hero" id="home">
-      <div class="hero-content reveal">
-        <p class="hero-eyebrow">Olá, eu sou</p>
-        <h1 class="hero-title">Lucas Belucci Bellini</h1>
-        <p class="hero-subtitle" id="typed"></p>
-        <p class="hero-desc">
-          Gosto de experimentar coisas novas e estou sempre aprendendo —
-          programação, robótica e trilhas estão entre as minhas paixões.
-          Acima de tudo, <strong>sempre termino o que começo</strong>, não importa quanto tempo leve.
-        </p>
-        <div class="hero-actions">
-          <a href="#projetos" class="btn btn-primary">Ver projetos</a>
-          <a href="#contato" class="btn btn-ghost">Entrar em contato</a>
+      <!-- Top bar: relógio + data + clima -->
+      <div class="top-bar reveal">
+        <div class="tb-block tb-time">
+          <div class="tb-label">⏱ Horário</div>
+          <div class="tb-value big" id="clock">--:--:--</div>
+          <div class="tb-sub">Brasília · UTC-3</div>
+        </div>
+        <div class="tb-block tb-date">
+          <div class="tb-label">📅 Data</div>
+          <div class="tb-value" id="dateline">--</div>
+          <div class="tb-sub" id="dayname">--</div>
+        </div>
+        <div class="tb-block tb-weather">
+          <div class="tb-label">☁ Tempo — Londrina, PR</div>
+          <div class="weather-row">
+            <span class="w-icon" id="wIcon">⏳</span>
+            <div class="w-details">
+              <div class="w-temp" id="wTemp">--°C</div>
+              <div class="w-desc" id="wDesc">Carregando…</div>
+              <div class="w-extras" id="wExtras"></div>
+            </div>
+          </div>
         </div>
       </div>
-      <a href="#sobre" class="scroll-cue" aria-label="Rolar para baixo">
-        <span></span>
-      </a>
+
+      <!-- Card de apresentação -->
+      <div class="hero-card brackets brackets-cyan tilt reveal" id="heroCard">
+        <div class="glow-sweep" aria-hidden="true"></div>
+        <span class="panel-badge">PT-BR</span>
+
+        <p class="hero-greeting">Apresentação</p>
+        <h1 class="hero-name">
+          <span class="hero-hi">Oi! Eu sou</span>
+          <span class="hero-name-main">Lucas Belucci Bellini</span>
+        </h1>
+        <p class="hero-role" id="typed"></p>
+        <p class="hero-desc">
+          Estudante de <em>Ciência da Computação</em> na UNIFIL, em Londrina — Brasil.
+          Este é o meu <strong>portfólio</strong>: um espaço onde reúno projetos, estudos
+          e experimentos construídos ao longo da minha jornada na computação.
+        </p>
+        <div class="hero-actions">
+          <a href="#projetos" class="btn btn-primary">&gt; Ver projetos</a>
+          <a href="#contato" class="btn btn-ghost">Contato</a>
+        </div>
+      </div>
+
+      <a href="#sobre" class="scroll-cue" aria-label="Rolar para baixo"><span></span></a>
     </section>
 
     <!-- ====== SOBRE ====== -->
     <section class="section" id="sobre">
       <div class="section-head reveal">
-        <span class="section-index">01</span>
+        <span class="section-index">// 01</span>
         <h2 class="section-title">Sobre mim</h2>
       </div>
 
       <div class="about-grid">
         <div class="about-intro reveal">
-          <div class="avatar">
+          <div class="avatar brackets brackets-orange">
             <span class="media-placeholder" aria-hidden="true">🛡️</span>
-            <!-- Troque automaticamente: basta enviar public/img/lucas-perfil.jpg -->
             <img src="img/lucas-perfil.jpg" alt="Foto de Lucas Belucci Bellini" loading="lazy" onerror="this.remove()" />
           </div>
-          <p class="about-tag">📍 Londrina, Paraná · Brasil</p>
+          <p class="about-tag">📍 Londrina · Paraná · Brasil</p>
+          <p class="about-tag">🎓 UNIFIL — Ciência da Computação</p>
         </div>
 
         <div class="about-text reveal">
@@ -100,25 +134,25 @@
           </p>
           <p>
             Meu maior projeto é o <strong>Projeto Baluarte</strong>, que está no ar e
-            recebe atualizações toda semana. Além dele, mantenho diversos experimentos
-            indo de simuladores de computadores a games autorais.
+            recebe atualizações toda semana. Além dele, mantenho diversos experimentos —
+            de simuladores de computadores a games autorais.
           </p>
 
           <div class="about-cards">
-            <div class="fact-card">
+            <div class="fact-card brackets brackets-cyan">
               <span class="fact-icon">🎓</span>
               <h3>Formação</h3>
-              <p>Londrinense Tech (1º e 2º semestre) &amp; cursos de Pensamento Computacional.</p>
+              <p>Ciência da Computação na UNIFIL (Londrina) + cursos de Pensamento Computacional.</p>
             </div>
-            <div class="fact-card">
+            <div class="fact-card brackets brackets-cyan">
               <span class="fact-icon">🚀</span>
               <h3>Em destaque</h3>
               <p>Projeto Baluarte — no ar e com atualizações semanais.</p>
             </div>
-            <div class="fact-card">
+            <div class="fact-card brackets brackets-cyan">
               <span class="fact-icon">🤖</span>
               <h3>IA &amp; criação</h3>
-              <p>Construo projetos apoiado em IA (Claude Sonnet, Codex).</p>
+              <p>Construo projetos apoiado em IA (Claude, Codex).</p>
             </div>
           </div>
         </div>
@@ -128,56 +162,53 @@
     <!-- ====== PROJETOS ====== -->
     <section class="section" id="projetos">
       <div class="section-head reveal">
-        <span class="section-index">02</span>
+        <span class="section-index">// 02</span>
         <h2 class="section-title">Projetos</h2>
         <p class="section-sub">Uma seleção do que venho construindo. Vários estão abertos no GitHub.</p>
       </div>
 
       <div class="projects-grid">
-        <!-- Destaque -->
-        <article class="project-card featured reveal">
+        <article class="project-card featured brackets brackets-mix reveal">
+          <div class="glow-sweep" aria-hidden="true"></div>
           <div class="project-top">
-            <span class="project-tag">Em destaque · No ar</span>
+            <span class="project-tag tag-green">● Em destaque · No ar</span>
             <span class="project-emoji">🛡️</span>
           </div>
           <h3>Projeto Baluarte</h3>
-          <p>
-            Meu projeto principal, online e com atualizações semanais. Uma plataforma
-            em constante evolução que reúne grande parte do meu trabalho.
-          </p>
+          <p>Meu projeto principal, online e com atualizações semanais. Uma plataforma em constante evolução que reúne grande parte do meu trabalho.</p>
           <div class="project-links">
-            <a href="https://projeto-baluarte.vercel.app/#/home" target="_blank" rel="noopener">Acessar site ↗</a>
+            <a href="https://projeto-baluarte.vercel.app/#/home" target="_blank" rel="noopener">Acessar ↗</a>
             <a href="https://github.com/Lucas-Belucci-Bellini/Projeto-Baluarte" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card brackets brackets-cyan reveal">
           <div class="project-top">
-            <span class="project-tag">Lógica digital</span>
+            <span class="project-tag tag-cyan">Lógica digital</span>
             <span class="project-emoji">💡</span>
           </div>
-          <h3>CHIPS — Simulador de Lógica Digital</h3>
+          <h3>CHIPS — Lógica Digital</h3>
           <p>Simulações de computadores de 8, 16, 32 e 64 bits, construídas a partir de portas lógicas.</p>
           <div class="project-links">
             <a href="https://github.com/Lucas-Belucci-Bellini/CHIPS-Digital-Logic-Sim-Lucas-Belucci" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card brackets brackets-cyan reveal">
           <div class="project-top">
-            <span class="project-tag">Game design</span>
+            <span class="project-tag tag-orange">Game design</span>
             <span class="project-emoji">🗺️</span>
           </div>
           <h3>Catacombs of Paris</h3>
-          <p>Projeto de design de um escape game ambientado nas catacumbas (ossário) de Paris.</p>
+          <p>Design de um escape game ambientado nas catacumbas (ossário) de Paris.</p>
           <div class="project-links">
             <a href="https://github.com/Lucas-Belucci-Bellini/Catacombs-of-Paris-Ossuary-Escape-game-design" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card brackets brackets-cyan reveal">
           <div class="project-top">
-            <span class="project-tag">Jogo</span>
+            <span class="project-tag tag-orange">Jogo</span>
             <span class="project-emoji">🎮</span>
           </div>
           <h3>Baluarte World Game</h3>
@@ -187,9 +218,9 @@
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card brackets brackets-cyan reveal">
           <div class="project-top">
-            <span class="project-tag">IA</span>
+            <span class="project-tag tag-cyan">IA</span>
             <span class="project-emoji">🧠</span>
           </div>
           <h3>AI Second Brain</h3>
@@ -199,9 +230,9 @@
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card brackets brackets-cyan reveal">
           <div class="project-top">
-            <span class="project-tag">Automação</span>
+            <span class="project-tag tag-green">Automação</span>
             <span class="project-emoji">📈</span>
           </div>
           <h3>Stock Analyzer Bot</h3>
@@ -211,9 +242,9 @@
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card brackets brackets-cyan reveal">
           <div class="project-top">
-            <span class="project-tag">Jogo</span>
+            <span class="project-tag tag-green">Jogo</span>
             <span class="project-emoji">♻️</span>
           </div>
           <h3>Recycle Game</h3>
@@ -223,9 +254,9 @@
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card brackets brackets-cyan reveal">
           <div class="project-top">
-            <span class="project-tag">Engenharia</span>
+            <span class="project-tag tag-orange">Engenharia</span>
             <span class="project-emoji">🏗️</span>
           </div>
           <h3>Baluarte Obra Segura</h3>
@@ -237,7 +268,7 @@
       </div>
 
       <p class="projects-more reveal">
-        Quer ver tudo? Confira meu perfil completo no
+        Todos os repositórios no
         <a href="https://github.com/Lucas-Belucci-Bellini" target="_blank" rel="noopener">GitHub ↗</a>
       </p>
     </section>
@@ -245,8 +276,8 @@
     <!-- ====== HABILIDADES ====== -->
     <section class="section" id="habilidades">
       <div class="section-head reveal">
-        <span class="section-index">03</span>
-        <h2 class="section-title">Habilidades &amp; Interesses técnicos</h2>
+        <span class="section-index">// 03</span>
+        <h2 class="section-title">Stack &amp; Interesses técnicos</h2>
       </div>
 
       <div class="skills-grid">
@@ -254,49 +285,45 @@
         <div class="skill-chip reveal"><span>🤖</span> Robótica</div>
         <div class="skill-chip reveal"><span>⚡</span> Lógica digital</div>
         <div class="skill-chip reveal"><span>🧊</span> Modelagem 3D</div>
-        <div class="skill-chip reveal"><span>🎮</span> Desenvolvimento de jogos</div>
+        <div class="skill-chip reveal"><span>🎮</span> Game dev</div>
         <div class="skill-chip reveal"><span>🧠</span> Projetos com IA</div>
         <div class="skill-chip reveal"><span>🔭</span> Projeções dimensionais</div>
         <div class="skill-chip reveal"><span>🥾</span> Trilhas &amp; exploração</div>
       </div>
     </section>
 
-    <!-- ====== NA IMPRENSA ====== -->
+    <!-- ====== IMPRENSA ====== -->
     <section class="section" id="imprensa">
       <div class="section-head reveal">
-        <span class="section-index">04</span>
+        <span class="section-index">// 04</span>
         <h2 class="section-title">Na imprensa &amp; momentos</h2>
         <p class="section-sub">Aparições na mídia e registros de momentos marcantes.</p>
       </div>
 
-      <article class="press-card reveal">
+      <article class="press-card brackets brackets-orange reveal">
         <figure class="press-figure media-frame">
           <span class="media-placeholder" aria-hidden="true">📰 Recorte do jornal — imagem em breve</span>
-          <!-- Envie public/img/imprensa-folha-londrina.jpg para preencher -->
           <img src="img/imprensa-folha-londrina.jpg" alt="Recorte do jornal Folha de Londrina citando Lucas Belucci" loading="lazy" onerror="this.remove()" />
         </figure>
         <div class="press-body">
           <span class="press-source">📍 Folha de Londrina · Coluna Social — Oswaldo Militão · 20/03/2026</span>
           <h3>Confraternização no Itaúna</h3>
           <blockquote>
-            “Encontro descontraído de amigos com ideias para fortalecer Londrina e disposição
-            de fazer o melhor pelo desenvolvimento regional. (…) Na foto, alguns dos muitos amigos
-            presentes Rosemeire e André Maciel, Tercilinho, Luciana e <strong>Lucas Belucci</strong>,
-            Neto Romanholi, deputado Turini, Ismail Antônio Loução, Giovani Rodrigues da Silva
-            e Natel Francisco Silva.”
+            “Encontro descontraído de amigos com ideias para fortalecer Londrina (…).
+            Na foto, alguns dos muitos amigos presentes Rosemeire e André Maciel, Tercilinho,
+            Luciana e <strong>Lucas Belucci</strong>, Neto Romanholi, deputado Turini, Ismail
+            Antônio Loução, Giovani Rodrigues da Silva e Natel Francisco Silva.”
           </blockquote>
         </div>
       </article>
 
       <div class="gallery">
-        <figure class="gallery-item media-frame reveal">
+        <figure class="gallery-item media-frame brackets brackets-cyan reveal">
           <span class="media-placeholder" aria-hidden="true">🖼️ Foto em breve</span>
-          <!-- Envie public/img/galeria-sao-miguel-1.jpg -->
           <img src="img/galeria-sao-miguel-1.jpg" alt="Lucas Belucci ao lado da estátua de São Miguel Arcanjo" loading="lazy" onerror="this.remove()" />
         </figure>
-        <figure class="gallery-item media-frame reveal">
+        <figure class="gallery-item media-frame brackets brackets-cyan reveal">
           <span class="media-placeholder" aria-hidden="true">🖼️ Foto em breve</span>
-          <!-- Envie public/img/galeria-sao-miguel-2.jpg -->
           <img src="img/galeria-sao-miguel-2.jpg" alt="Grupo na instalação do obelisco em devoção a São Miguel Arcanjo" loading="lazy" onerror="this.remove()" />
         </figure>
       </div>
@@ -305,21 +332,21 @@
     <!-- ====== INTERESSES ====== -->
     <section class="section" id="interesses">
       <div class="section-head reveal">
-        <span class="section-index">05</span>
+        <span class="section-index">// 05</span>
         <h2 class="section-title">Fora do código</h2>
         <p class="section-sub">Quando não estou programando, é provável que eu esteja por aqui.</p>
       </div>
 
       <div class="interests-grid">
-        <div class="interest-card reveal">
+        <div class="interest-card brackets brackets-cyan reveal">
           <h3>🎬 Filmes</h3>
           <p>Transformers, Pacific Rim, Godzilla, Batman e o universo Marvel.</p>
         </div>
-        <div class="interest-card reveal">
+        <div class="interest-card brackets brackets-cyan reveal">
           <h3>🕹️ Jogos</h3>
           <p>ARMA 3, Fallout 4, HALO, War Thunder, DOOM e Warhammer 40K.</p>
         </div>
-        <div class="interest-card reveal">
+        <div class="interest-card brackets brackets-cyan reveal">
           <h3>🎵 Música</h3>
           <p>Trilha sonora constante para programar e relaxar.</p>
         </div>
@@ -329,38 +356,38 @@
     <!-- ====== CONTATO ====== -->
     <section class="section" id="contato">
       <div class="section-head reveal">
-        <span class="section-index">06</span>
+        <span class="section-index">// 06</span>
         <h2 class="section-title">Vamos conversar</h2>
         <p class="section-sub">Me encontre nas redes — respondo por todas elas.</p>
       </div>
 
       <div class="contact-grid">
-        <a class="contact-card contact-instagram reveal" href="https://www.instagram.com/lucas_belucci_bellini/" target="_blank" rel="noopener">
+        <a class="contact-card contact-instagram brackets brackets-mix reveal" href="https://www.instagram.com/lucas_belucci_bellini/" target="_blank" rel="noopener">
           <span class="contact-icon">📸</span>
           <span class="contact-name">Instagram <span class="badge-official">✔ Oficial</span></span>
           <span class="contact-handle">@lucas_belucci_bellini</span>
         </a>
-        <a class="contact-card reveal" href="https://github.com/Lucas-Belucci-Bellini" target="_blank" rel="noopener">
+        <a class="contact-card brackets brackets-cyan reveal" href="https://github.com/Lucas-Belucci-Bellini" target="_blank" rel="noopener">
           <span class="contact-icon">🐙</span>
           <span class="contact-name">GitHub</span>
           <span class="contact-handle">Lucas-Belucci-Bellini</span>
         </a>
-        <a class="contact-card reveal" href="https://www.youtube.com/@spartan_gamer_br" target="_blank" rel="noopener">
+        <a class="contact-card brackets brackets-cyan reveal" href="https://www.youtube.com/@spartan_gamer_br" target="_blank" rel="noopener">
           <span class="contact-icon">▶️</span>
           <span class="contact-name">YouTube</span>
           <span class="contact-handle">@spartan_gamer_br</span>
         </a>
-        <a class="contact-card reveal" href="https://www.twitch.tv/spartan_gamer_pro" target="_blank" rel="noopener">
+        <a class="contact-card brackets brackets-cyan reveal" href="https://www.twitch.tv/spartan_gamer_pro" target="_blank" rel="noopener">
           <span class="contact-icon">🎬</span>
           <span class="contact-name">Twitch</span>
           <span class="contact-handle">spartan_gamer_pro</span>
         </a>
-        <a class="contact-card reveal" href="https://open.spotify.com/" target="_blank" rel="noopener">
+        <a class="contact-card brackets brackets-cyan reveal" href="https://open.spotify.com/" target="_blank" rel="noopener">
           <span class="contact-icon">🎧</span>
           <span class="contact-name">Spotify</span>
           <span class="contact-handle">Spartan Br</span>
         </a>
-        <a class="contact-card reveal" href="mailto:lucasbb2007@gmail.com">
+        <a class="contact-card brackets brackets-cyan reveal" href="mailto:lucasbb2007@gmail.com">
           <span class="contact-icon">✉️</span>
           <span class="contact-name">E-mail</span>
           <span class="contact-handle">lucasbb2007@gmail.com</span>
@@ -376,9 +403,18 @@
 
   <!-- ====== RODAPÉ ====== -->
   <footer class="footer">
-    <p class="footer-brand">🛡️ Lucas Belucci Bellini</p>
-    <p class="footer-note">Sempre terminando o que começo. · Feito com Vite, HTML, CSS &amp; JavaScript.</p>
-    <p class="footer-year">© <span id="year"></span> — Todos os direitos reservados.</p>
+    <div class="footer-bar">
+      <span class="fb-left">UNIFIL · Londrina, Paraná · Brasil</span>
+      <span class="fb-dots">
+        <span class="fb-dot" style="background:var(--cyan)"></span>
+        <span class="fb-dot" style="background:var(--orange)"></span>
+        <span class="fb-dot" style="background:var(--green)"></span>
+      </span>
+      <span class="fb-right" id="uptime">◈ online</span>
+    </div>
+    <p class="footer-brand">🛡️ LUCAS BELUCCI BELLINI</p>
+    <p class="footer-note">Sempre terminando o que começo. · Feito com Vite + HTML, CSS &amp; JS.</p>
+    <p class="footer-year">© <span id="year"></span></p>
   </footer>
 
   <script type="module" src="/src/main.js"></script>

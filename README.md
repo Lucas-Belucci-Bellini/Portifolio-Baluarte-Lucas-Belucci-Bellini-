@@ -1,72 +1,70 @@
 # 🛡️ Portfólio — Lucas Belucci Bellini
 
-Site de portfólio pessoal de **Lucas Belucci Bellini**, construído com **Vite**
-(HTML, CSS e JavaScript), migrado a partir do antigo portfólio no Google Sites.
+Site de portfólio pessoal de **Lucas Belucci Bellini**, estudante de
+**Ciência da Computação na UNIFIL** (Londrina, Brasil). Construído com **Vite**
+(HTML, CSS e JavaScript) e publicado na **Vercel**.
 
 > _"Sempre termino o que começo, não importa quanto tempo leve."_
 
-## ✨ Seções
+## ✨ Visual
 
-- **Início** — apresentação com efeito de digitação
-- **Sobre** — quem sou, formação, foto de perfil e foco atual
-- **Projetos** — Projeto Baluarte, CHIPS, games, projetos com IA e mais
-- **Habilidades** — programação, robótica, lógica digital, 3D, jogos e IA
-- **Na imprensa & momentos** — aparição na Folha de Londrina e galeria de fotos
-- **Interesses** — filmes, jogos e música
-- **Contato** — Instagram oficial, GitHub, YouTube, Twitch, Spotify e e-mail
+Tema HUD futurista (cyan / laranja / verde) com:
+
+- Cursor customizado, scanlines e partículas em constelação no fundo
+- Barra com **relógio**, **data** e **previsão do tempo ao vivo** (Open-Meteo, Londrina)
+- Cards com cantos "pixel" (corner brackets), efeito de digitação e tilt 3D
+- Fontes Orbitron, JetBrains Mono e Inter
+
+## 🧭 Seções
+
+Início · Sobre · Projetos · Stack · Na imprensa & momentos · Interesses · Contato
 
 ## 🚀 Tecnologias
 
-- [Vite](https://vitejs.dev/) (build e dev server)
-- HTML5 semântico
-- CSS3 (grid, flexbox, animações, design responsivo)
-- JavaScript (sem frameworks)
-- Google Fonts (Orbitron + Inter)
+- [Vite](https://vitejs.dev/) — build e dev server
+- HTML5, CSS3 (grid, flexbox, animações) e JavaScript sem frameworks
+- API Open-Meteo (clima, sem chave)
 
 ## 📂 Estrutura
 
 ```
 .
-├── index.html              # Página principal (entry point do Vite)
+├── index.html          # Página principal (entry point do Vite)
 ├── src/
-│   ├── main.js             # Interações + importa o CSS
-│   └── style.css           # Estilos e responsividade
+│   ├── main.js         # Interações + importa o CSS
+│   └── style.css       # Estilos e responsividade
 ├── public/
-│   ├── .nojekyll
-│   └── img/                # Imagens do site (ver public/img/README.md)
-├── .github/workflows/
-│   └── deploy.yml          # Deploy automático no GitHub Pages
+│   └── img/            # Imagens do site (ver public/img/README.md)
 ├── vite.config.js
+├── vercel.json         # Configuração de deploy na Vercel
 └── package.json
 ```
 
 ## 💻 Rodar localmente
 
 ```bash
-npm install      # instala as dependências (1ª vez)
-npm run dev      # servidor de desenvolvimento (http://localhost:5173)
-npm run build    # gera a versão de produção em dist/
-npm run preview  # pré-visualiza o build de produção
+npm install      # 1ª vez
+npm run dev      # http://localhost:5173
+npm run build    # gera dist/
+npm run preview  # pré-visualiza o build
 ```
 
-## 🌐 Publicação (GitHub Pages automático)
+## 🌐 Deploy (Vercel)
 
-O deploy é **automático** via GitHub Actions a cada push na branch `main`.
-Para ativar (uma única vez):
-
-1. Vá em **Settings → Pages**.
-2. Em **Build and deployment → Source**, selecione **GitHub Actions**.
-
-A partir daí, todo push no `main` publica o site em:
-
-```
-https://lucas-belucci-bellini.github.io/Portifolio-Baluarte-Lucas-Belucci-Bellini-/
-```
+O site é publicado na **Vercel**, que detecta o projeto Vite, roda
+`npm run build` e serve a pasta `dist/`. Cada push no `main` gera um novo deploy
+automaticamente.
 
 ## 🖼️ Adicionar imagens
 
-Veja [`public/img/README.md`](public/img/README.md) — basta enviar os arquivos
-com os nomes indicados e eles aparecem automaticamente no site.
+Veja [`public/img/README.md`](public/img/README.md) — envie os arquivos com os
+nomes indicados e eles aparecem sozinhos no site.
+
+## 🌿 Fluxo de branches
+
+A cada atualização é criada uma branch `backup/<data>-<descrição>` com o estado
+anterior (ponto de retorno), e a mudança é feita numa branch `update/<descrição>`
+que depois vai para o `main`.
 
 ## 🔗 Links
 
